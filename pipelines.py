@@ -1,5 +1,7 @@
 import pandas as pd
 
+from abc import ABC, abstractmethod
+
 from scrapers import PubMedScraper, FindMeCureDBScraper
 
 # from transformers import PubMedTransformer, FindMeCureDBTransformer
@@ -7,7 +9,12 @@ from scrapers import PubMedScraper, FindMeCureDBScraper
 from loaders import PubMedLoader
 
 
-class PubMedPipeline:
+class Pipeline(ABC):
+    @abstractmethod
+    def run(): ...
+
+
+class PubMedPipeline(Pipeline):
     def run():
         pubmed_results = PubMedScraper(
             batch_size=2500,  # max 9999 publications
