@@ -5,10 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "pipelines.py",
             "type": "debugpy",
             "request": "launch",
-            "program": "biopython_pubmed_scraper.py",
+            "program": "pipelines.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "scrapers.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scrapers.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "main.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main.py",
             "console": "integratedTerminal"
         }
     ]

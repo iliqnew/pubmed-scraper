@@ -1,6 +1,11 @@
 import json
 
+
+from Bio import Entrez
 from typing import Union, Literal, Any
+
+
+EMAIL = "iliqanew@email.com"
 
 
 with open("person_profiles.json", "rb") as f:
@@ -29,3 +34,25 @@ def clean_is_stored(author: dict[str, Any]) -> dict[Literal["isStored"], bool]:
     ]
 
     return {"isStored": is_stored}
+
+
+def search_query(query: str, retstart: int = 0, retmax: int = 9999):
+    Entrez.email = EMAIL
+    handle = Entrez.esearch(
+        db="pubmed",
+        sort="relevance",
+        retmax=str(retmax),
+        retstart=str(retstart),
+        retmode="xml",
+        term=query,
+    )
+    ids = Entrez.read(handle)
+    return ids
+
+
+def get_publications_by_ids(id_list):
+    ids = ",".join(id_list)
+    Entrez.email = EMAIL
+    handle = Entrez.efetch(db="pubmed", retmode="xml", id=ids)
+    raw_publications = Entrez.read(handle)
+    return raw_publications
